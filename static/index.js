@@ -1,12 +1,12 @@
-// index.js — тёмная тема, анимация, форма
+// index.js — тёмная тема, анимация, навигация
 
 const topAppBar = document.getElementById('topAppBar');
-const menuBtn = document.getElementById('menuBtn');
-const topNav = document.getElementById('topNav');
-const navLinks = topNav.querySelectorAll('a');
-const sections = document.querySelectorAll('section[id]');
+const menuBtn   = document.getElementById('menuBtn');
+const topNav    = document.getElementById('topNav');
+const navLinks  = topNav.querySelectorAll('a');
+const sections  = document.querySelectorAll('section[id]');
 const themeToggle = document.getElementById('themeToggle');
-const themeIcon = themeToggle.querySelector('.material-symbols-rounded');
+const themeIcon   = themeToggle.querySelector('.material-symbols-rounded');
 
 // ─── ТЁМНАЯ ТЕМА ───────────────────────────────
 function setTheme(theme) {
@@ -22,7 +22,7 @@ function setTheme(theme) {
 }
 
 function initTheme() {
-    const savedTheme = localStorage.getItem('theme');
+    const savedTheme  = localStorage.getItem('theme');
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
     if (savedTheme === 'dark' || (!savedTheme && prefersDark)) {
         setTheme('dark');
@@ -32,55 +32,52 @@ function initTheme() {
 }
 
 themeToggle.addEventListener('click', () => {
-    const isDark = document.body.classList.contains('dark-theme');
-    setTheme(isDark ? 'light' : 'dark');
+    setTheme(document.body.classList.contains('dark-theme') ? 'light' : 'dark');
 });
 
-// App bar shadow
+// ─── APP BAR SHADOW ─────────────────────────────
 function updateAppBarShadow() {
-    if (window.scrollY > 20) topAppBar.classList.add('scrolled');
-    else topAppBar.classList.remove('scrolled');
+    topAppBar.classList.toggle('scrolled', window.scrollY > 20);
 }
-window.addEventListener('scroll', updateAppBarShadow);
+window.addEventListener('scroll', updateAppBarShadow, { passive: true });
 
-// Mobile menu
+// ─── MOBILE MENU ─────────────────────────────────
 menuBtn.addEventListener('click', () => {
     topNav.classList.toggle('open');
-    const icon = menuBtn.querySelector('.material-symbols-rounded');
-    icon.textContent = topNav.classList.contains('open') ? 'close' : 'menu';
+    menuBtn.querySelector('.material-symbols-rounded').textContent =
+        topNav.classList.contains('open') ? 'close' : 'menu';
 });
 navLinks.forEach(link => {
     link.addEventListener('click', () => {
         topNav.classList.remove('open');
-        if (menuBtn.querySelector('.material-symbols-rounded'))
-            menuBtn.querySelector('.material-symbols-rounded').textContent = 'menu';
+        menuBtn.querySelector('.material-symbols-rounded').textContent = 'menu';
     });
 });
 
-// Active nav link on scroll
+// ─── ACTIVE NAV LINK ─────────────────────────────
 function updateActiveNavLink() {
-    let current = '';
     const scrollPos = window.scrollY + 120;
+    let current = '';
+
     sections.forEach(section => {
-        const top = section.offsetTop;
-        const height = section.offsetHeight;
-        if (scrollPos >= top && scrollPos < top + height)
+        if (scrollPos >= section.offsetTop && scrollPos < section.offsetTop + section.offsetHeight) {
             current = section.getAttribute('id');
+        }
     });
-    navLinks.forEach(link => {
-        link.classList.remove('active');
-        if (link.getAttribute('href') === '#' + current) link.classList.add('active');
-    });
+
+    navLinks.forEach(link => link.classList.remove('active'));
+
     if (window.scrollY < 200) {
-        navLinks.forEach(l => l.classList.remove('active'));
         const heroLink = topNav.querySelector('a[href="#hero"]');
         if (heroLink) heroLink.classList.add('active');
+    } else if (current) {
+        const activeLink = topNav.querySelector(`a[href="#${current}"]`);
+        if (activeLink) activeLink.classList.add('active');
     }
 }
-window.addEventListener('scroll', updateActiveNavLink);
+window.addEventListener('scroll', updateActiveNavLink, { passive: true });
 
-// Intersection Observer для анимации появления
-const observerOptions = { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0.15 };
+// ─── SCROLL ANIMATIONS ───────────────────────────
 const appearObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -88,45 +85,53 @@ const appearObserver = new IntersectionObserver((entries) => {
             appearObserver.unobserve(entry.target);
         }
     });
-}, observerOptions);
+}, { root: null, rootMargin: '0px 0px -60px 0px', threshold: 0.12 });
+
 document.querySelectorAll('.animate-on-scroll').forEach(el => appearObserver.observe(el));
 
-// Skill bars animation
+// ─── SKILL BARS ──────────────────────────────────
 const skillBars = document.querySelectorAll('.skill-card__bar-fill');
 const skillObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
         if (entry.isIntersecting) {
             const bar = entry.target;
-            const targetWidth = bar.getAttribute('data-width');
-            if (targetWidth) bar.style.width = targetWidth + '%';
+            const target = bar.getAttribute('data-width');
+            if (target) bar.style.width = target + '%';
             skillObserver.unobserve(bar);
         }
     });
 }, { threshold: 0.3 });
+
 skillBars.forEach(bar => {
     bar.style.width = '0%';
     skillObserver.observe(bar);
 });
 
-// Form submit handler
-window.handleSubmit = function(event) {
-    event.preventDefault();
-    const btn = event.target.querySelector('button[type="submit"]');
-    const originalHTML = btn.innerHTML;
-    btn.innerHTML = '<span class="material-symbols-rounded">check_circle</span> Отправлено!';
-    btn.style.backgroundColor = '#4CAF50';
-    btn.style.color = '#fff';
-    btn.disabled = true;
-    setTimeout(() => {
-        btn.innerHTML = originalHTML;
-        btn.style.backgroundColor = '';
-        btn.style.color = '';
-        btn.disabled = false;
-        event.target.reset();
-    }, 2500);
-};
+// ─── PROJECT CARD: touch support для мобильных ───
+// На мобиле нет hover — тап переключает превью
+document.querySelectorAll('.project-card').forEach(card => {
+    let touched = false;
+    card.addEventListener('click', (e) => {
+        // Если клик по ссылке — не перехватываем
+        if (e.target.closest('a, .project-link--wip')) return;
 
-// init
+        // Только на тач-устройствах переключаем превью
+        if (!window.matchMedia('(hover: none)').matches) return;
+
+        touched = !touched;
+        card.classList.toggle('touch-preview', touched);
+    });
+});
+
+// Добавляем CSS для touch-preview
+const touchStyle = document.createElement('style');
+touchStyle.textContent = `
+    .project-card.touch-preview .project-card__screenshot { opacity: 1; }
+    .project-card.touch-preview .project-card__default    { opacity: 0; }
+`;
+document.head.appendChild(touchStyle);
+
+// ─── INIT ─────────────────────────────────────────
 initTheme();
 updateAppBarShadow();
 updateActiveNavLink();
