@@ -10,295 +10,235 @@
 </head>
 <body>
 
-    <!-- ═══════════════ TOP APP BAR ═══════════════ -->
-    <header class="md-top-app-bar" id="topAppBar">
-        <span class="md-top-app-bar__title">Xibsy</span>
-        <button class="md-menu-btn" id="menuBtn" aria-label="Меню">
-            <span class="material-symbols-rounded">menu</span>
-        </button>
-        <nav class="md-top-app-bar__nav" id="topNav">
-            <a href="#hero">Главная</a>
-            <a href="#about">Обо мне</a>
-            <a href="#projects">Проекты</a>
-            <a href="#skills">Навыки</a>
-            <a href="#social">Соцсети</a>
-        </nav>
-        <button class="md-theme-toggle" id="themeToggle" aria-label="Тёмная тема">
-            <span class="material-symbols-rounded">dark_mode</span>
-        </button>
-    </header>
+    <div class="fullscreen-bg" id="fullscreenBg"></div>
+    <div class="fullscreen-bg-overlay"></div>
 
-    <!-- ═══════════════ HERO ══════════════════════ -->
-    <section class="hero" id="hero">
-        <div class="hero__bg-pattern"></div>
-        <div class="hero__bg-animated">
-            <div class="bg-circle bg-circle-1"></div>
-            <div class="bg-circle bg-circle-2"></div>
-            <div class="bg-circle bg-circle-3"></div>
-            <div class="bg-circle bg-circle-4"></div>
+    <div class="bio-container">
+        <div class="header-controls">
+            <button class="md-icon-btn" id="themeToggle" aria-label="Переключить тему">
+                <span class="material-symbols-rounded">dark_mode</span>
+            </button>
         </div>
-        <div class="hero__content">
-            <div class="hero__avatar">
-                <img src="static/avatar.png" alt="Xibsy avatar">
+
+        <header class="profile-header">
+            <div class="avatar-wrapper">
+                <div class="avatar-glow"></div>
+                <img src="static/avatar.png" alt="Xibsy avatar" class="avatar" id="avatarImg" crossorigin="anonymous">
             </div>
-            <h1 class="hero__name"><span class="highlight">Xibsy</span></h1>
-            <p class="hero__tagline">Разработчик • Друн • Геймер</p>
-            <div class="hero__chips">
+            <h1 class="profile-name">Xibsy</h1>
+            <p class="profile-tagline">Разработчик • Друн • Геймер</p>
+
+            <div class="profile-chips">
                 <span class="md-chip"><span class="material-symbols-rounded">design_services</span> Программирование</span>
                 <span class="md-chip"><span class="material-symbols-rounded">code</span> Python dev</span>
-                <span class="md-chip"><span class="material-symbols-rounded">palette</span> Figma дезайнер</span>
             </div>
-            <div class="hero__actions">
-                <a href="https://t.me/Xibsy" target="_blank" rel="noopener" class="md-btn md-btn--filled">
-                    <span class="material-symbols-rounded">chat</span> Написать в Telegram
-                </a>
-                <a href="#about" class="md-btn md-btn--outlined">
-                    <span class="material-symbols-rounded">arrow_downward</span> Узнать больше
-                </a>
-            </div>
-        </div>
-    </section>
+        </header>
 
-    <!-- ═══════════════ ABOUT ═════════════════════ -->
-    <section class="section" id="about">
-        <div class="section__header animate-on-scroll">
-            <span class="section__label">Обо мне</span>
-            <h2 class="section__title">Программирование с душой</h2>
-            <p class="section__subtitle">Создаю цифровые продукты, которые решают реальные задачи и приносят радость людям.</p>
-        </div>
-        <div class="about-grid">
-            <div class="md-card md-card--elevated animate-on-scroll">
-                <div class="md-card__title">
-                    <span class="material-symbols-rounded">person</span> Кто я
-                </div>
-                <p class="md-card__text">
-                    Я — начинающий backend-программист с 2-годами обучения в Яндек Лицее.
-                    Обычно горю проектами которые приходят спантанно и реализую их на высшем уровне.
-                    Надеюсь обучится всему до эры нейроситей в IT-сфере.
-                    <br><br>
-                    Люблю github за его простоту и красоту. Так же в будущих планах иммеется майнкрафт проект.
-                </p>
-            </div>
-            <div class="md-card animate-on-scroll animate-on-scroll--delay-1">
-                <div class="md-card__title">
-                    <span class="material-symbols-rounded">star</span> Ключевые принципы
-                </div>
-                <ul class="about-highlights">
-                    <li><span class="material-symbols-rounded">check_circle</span><span><strong>Не ленится.</strong> Успех не приходит просто так, его надо добится.</span></li>
-                    <li><span class="material-symbols-rounded">check_circle</span><span><strong>Систематичность.</strong> Структурирование информации для облегчения процеса.</span></li>
-                    <li><span class="material-symbols-rounded">check_circle</span><span><strong>Прозрачность.</strong> Открыто делюсь процессом разработки.</span></li>
-                </ul>
-            </div>
-        </div>
-    </section>
+        <section class="music-player">
+            <audio id="audio-track"></audio>
 
-    <!-- ═══════════════ PROJECTS ══════════════════ -->
-    <section class="section projects-section" id="projects"
-        style="background-color: var(--md-surface-container-low); max-width: 100%;
-               padding-left: calc((100% - 1100px) / 2 + 24px);
-               padding-right: calc((100% - 1100px) / 2 + 24px);">
-        <div class="section__header animate-on-scroll">
-            <span class="section__label">Мои проекты</span>
-            <h2 class="section__title">Что работает, будет работать и не работает</h2>
-            <p class="section__subtitle">Наведи на карточку — увидишь скриншот. Кликни по ссылке — перейдёшь к проекту.</p>
-        </div>
-        <div class="projects-grid">
-
-            <!-- Bio -->
-            <div class="project-card animate-on-scroll">
-                <div class="project-card__thumb">
-                    <div class="project-card__default">
-                        <div class="project-card__icon" style="--p-icon-bg:#dbeafe;--p-icon-color:#2563eb;">
-                            <span class="material-symbols-rounded">language</span>
-                        </div>
-                        <span class="project-card__badge">Bio</span>
-                    </div>
-                    <div class="project-card__screenshot">
-                        <img src="static/project-photos/img.png" alt="Скриншот сайта">
-                        <div class="project-card__screenshot-hint">
-                            <span class="material-symbols-rounded">visibility</span> Предпросмотр
-                        </div>
-                    </div>
-                </div>
-                <div class="project-card__body">
-                    <h3 class="project-card__name">Портфолио-сайт</h3>
-                    <p class="project-card__desc">Личный сайт-визитка с анимациями, тёмной темой и Material Design 3. Сделано с нуля на чистом HTML/CSS/JS.</p>
-                    <div class="project-card__links">
-                        <a href="https://github.com/Xibsy/xibsy-bio" target="_blank" rel="noopener" class="project-link project-link--source">
-                            <span class="material-symbols-rounded">code</span> Исходники
-                        </a>
-                        <a href="https://bio.xibsy-dev.ru" target="_blank" rel="noopener" class="project-link project-link--demo">
-                            <span class="material-symbols-rounded">open_in_new</span> Сайт
-                        </a>
-                    </div>
+            <div class="player-cover-area">
+                <img src="" alt="Track cover" class="track-cover" id="trackCover" style="display: none;" crossorigin="anonymous">
+                <div class="fallback-icon-wrapper" id="default-disc-icon">
+                    <span class="material-symbols-rounded disc-icon">music_note</span>
                 </div>
             </div>
 
-            <!-- Minecraft -->
-            <div class="project-card animate-on-scroll animate-on-scroll--delay-1">
-                <div class="project-card__thumb">
-                    <div class="project-card__default">
-                        <div class="project-card__icon" style="--p-icon-bg:#ede9fe;--p-icon-color:#7c3aed;">
-                            <span class="material-symbols-rounded">sports_esports</span>
-                        </div>
-                        <span class="project-card__badge">Minecraft</span>
-                    </div>
-                    <div class="project-card__screenshot">
-                        <img src="static/project-photos/img_1.png" alt="Скриншот Minecraft">
-                        <div class="project-card__screenshot-hint">
-                            <span class="material-symbols-rounded">visibility</span> Предпросмотр
-                        </div>
+            <div class="player-content-area">
+                <div class="player-info">
+                    <div class="track-details">
+                        <div class="track-title" id="trackTitle">Загрузка...</div>
+                        <div class="track-author" id="trackAuthor">Пожалуйста, подождите</div>
                     </div>
                 </div>
-                <div class="project-card__body">
-                    <h3 class="project-card__name">Minecraft-проект</h3>
-                    <p class="project-card__desc">Собственный Minecraft-сервер формата SMP. В активной разработке.</p>
-                    <div class="project-card__links">
-                        <span class="project-link project-link--wip">
-                            <span class="material-symbols-rounded">construction</span> В разработке
-                        </span>
+                <div class="player-controls">
+                    <button class="player-btn" id="play-pause-btn" aria-label="Воспроизведение">
+                        <span class="material-symbols-rounded" id="play-icon">play_arrow</span>
+                    </button>
+
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-track"></div>
+                        <div class="progress-bar-flat" id="progress-bar-flat"></div>
+                        <div class="progress-bar-wave" id="progress-bar-wave"></div>
+                        <div class="progress-thumb" id="progress-thumb"></div>
+                    </div>
+
+                    <span class="time-display" id="time-display">0:00</span>
+                </div>
+            </div>
+        </section>
+
+        <nav class="material-tabs">
+            <button class="tab-btn active" data-tab="info">
+                <span class="material-symbols-rounded">person</span> Инфо
+            </button>
+            <button class="tab-btn" data-tab="projects">
+                <span class="material-symbols-rounded">folder_open</span> Проекты
+            </button>
+            <button class="tab-btn" data-tab="socials">
+                <span class="material-symbols-rounded">share</span> Соцсети
+            </button>
+        </nav>
+
+        <main class="tab-content">
+
+            <div class="tab-pane active" id="info">
+                <div class="info-block">
+                    <h3 class="block-title"><span class="material-symbols-rounded">badge</span> Кто я</h3>
+                    <p class="block-text">
+                        Я — перспективный backend-разработчик с солидной базой в виде двух лет обучения в Яндекс Лицее.
+                        Меня по-настоящему зажигают спонтанные и амбициозные идеи, которые я стремлюсь реализовывать на высшем уровне.
+                        Постоянно изучаю новые технологии и прокачиваю навыки, стремясь взять от IT-сферы максимум.
+                        <br><br>
+                        Искренне ценю GitHub за его продуманную эстетику, лаконичность и удобство. Прямо сейчас в моих планах стоит разработка и запуск собственного уникального Minecraft-проекта формата SMP.
+                    </p>
+                </div>
+
+                <div class="info-block">
+                    <h3 class="block-title"><span class="material-symbols-rounded">handyman</span> Навыки</h3>
+                    <div class="skills-grid">
+
+                        <div class="skill-card">
+                            <div class="skill-card__icon"><span class="material-symbols-rounded">code</span></div>
+                            <div class="skill-card__name">Python разработка</div>
+                            <div class="skill-card__bar-track"><div class="skill-bar-fill" data-width="89"></div></div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-card__icon"><span class="material-symbols-rounded">grid_view</span></div>
+                            <div class="skill-card__name">UI & Визуальный дизайн</div>
+                            <div class="skill-card__bar-track"><div class="skill-bar-fill" data-width="37"></div></div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-card__icon"><span class="material-symbols-rounded">terminal</span></div>
+                            <div class="skill-card__name">HTML / CSS / Базовый JS</div>
+                            <div class="skill-card__bar-track"><div class="skill-bar-fill" data-width="28"></div></div>
+                        </div>
+
+                        <div class="skill-card">
+                            <div class="skill-card__icon"><span class="material-symbols-rounded">draw</span></div>
+                            <div class="skill-card__name">Промтинженеринг</div>
+                            <div class="skill-card__bar-track"><div class="skill-bar-fill" data-width="18"></div></div>
+                        </div>
+
                     </div>
                 </div>
             </div>
 
-            <!-- Klinb -->
-            <div class="project-card animate-on-scroll animate-on-scroll--delay-1">
-                <div class="project-card__thumb">
-                    <div class="project-card__default">
-                        <div class="project-card__icon" style="--p-icon-bg:#ede9fe;--p-icon-color:#7c3aed;">
-                            <span class="material-symbols-rounded">globe_location_pin</span>
+            <div class="tab-pane" id="projects">
+                <p class="tab-hint">Наведи на карточку — увидишь скриншот. Кликни по ссылке для перехода.</p>
+                <div class="projects-list">
+
+                    <div class="project-card">
+                        <div class="project-card__thumb">
+                            <div class="project-card__default">
+                                <div class="project-card__icon" style="--p-icon-bg:#dbeafe;--p-icon-color:#2563eb;">
+                                    <span class="material-symbols-rounded">language</span>
+                                </div>
+                                <span class="project-card__badge">Bio</span>
+                            </div>
+                            <div class="project-card__screenshot">
+                                <img src="static/project-photos/img.png" alt="Скриншот сайта">
+                            </div>
                         </div>
-                        <span class="project-card__badge">Klinb</span>
-                    </div>
-                    <div class="project-card__screenshot">
-                        <img src="static/project-photos/img_2.png" alt="Скриншот Klinb">
-                        <div class="project-card__screenshot-hint">
-                            <span class="material-symbols-rounded">visibility</span> Предпросмотр
+                        <div class="project-card__body">
+                            <h3>Портфолио-сайт</h3>
+                            <p>Личный сайт-визитка с анимациями, тёмной темой и Material Design 3.</p>
+                            <div class="project-card__links">
+                                <a href="https://github.com/Xibsy/xibsy-bio" target="_blank" rel="noopener" class="project-link project-link--source">Исходники</a>
+                                <a href="https://bio.xibsy-dev.ru" target="_blank" rel="noopener" class="project-link project-link--demo">Сайт</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-                <div class="project-card__body">
-                    <h3 class="project-card__name">Klinb - друзья рядом</h3>
-                    <p class="project-card__desc">Klinb - косвенная копия Blink с публичной лентой. Закрыт по причине финансирования.</p>
-                    <div class="project-card__links">
-                        <span class="project-link project-link--wip">
-                            <span class="material-symbols-rounded">block</span> Закрыто
-                        </span>
+
+                    <div class="project-card">
+                        <div class="project-card__thumb">
+                            <div class="project-card__default">
+                                <div class="project-card__icon" style="--p-icon-bg:#ede9fe;--p-icon-color:#7c3aed;">
+                                    <span class="material-symbols-rounded">sports_esports</span>
+                                </div>
+                                <span class="project-card__badge">Minecraft</span>
+                            </div>
+                            <div class="project-card__screenshot">
+                                <img src="static/project-photos/img_1.png" alt="Скриншот Minecraft">
+                            </div>
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Minecraft-проект</h3>
+                            <p>Собственный Minecraft-сервер формата SMP. В активной разработке.</p>
+                            <div class="project-card__links">
+                                <span class="project-link project-link--wip">В разработке</span>
+                            </div>
+                        </div>
                     </div>
+
+                    <div class="project-card">
+                        <div class="project-card__thumb">
+                            <div class="project-card__default">
+                                <div class="project-card__icon" style="--p-icon-bg:#fee2e2;--p-icon-color:#dc2626;">
+                                    <span class="material-symbols-rounded">globe_location_pin</span>
+                                </div>
+                                <span class="project-card__badge">Klinb</span>
+                            </div>
+                            <div class="project-card__screenshot">
+                                <img src="static/project-photos/img_2.png" alt="Скриншот Klinb">
+                            </div>
+                        </div>
+                        <div class="project-card__body">
+                            <h3>Klinb - друзья рядом</h3>
+                            <p>Косвенная копия Blink с публичной лентой. Закрыт по причине финансирования.</p>
+                            <div class="project-card__links">
+                                <span class="project-link project-link--wip">Закрыто</span>
+                            </div>
+                        </div>
+                    </div>
+
                 </div>
             </div>
 
-        </div>
-    </section>
-
-    <!-- ═══════════════ SKILLS ════════════════════ -->
-    <section class="section" id="skills"
-        style="background-color: var(--md-surface); max-width: 100%;
-               padding-left: calc((100% - 1100px) / 2 + 24px);
-               padding-right: calc((100% - 1100px) / 2 + 24px);">
-        <div class="section__header animate-on-scroll">
-            <span class="section__label">Навыки</span>
-            <h2 class="section__title">Инструменты и компетенции</h2>
-        </div>
-        <div class="skills-grid">
-            <div class="skill-card animate-on-scroll">
-                <div class="skill-card__icon"><span class="material-symbols-rounded">code</span></div>
-                <div class="skill-card__name">Python разработка</div>
-                <div class="skill-card__bar-track"><div class="skill-card__bar-fill" data-width="89"></div></div>
-            </div>
-            <div class="skill-card animate-on-scroll animate-on-scroll--delay-1">
-                <div class="skill-card__icon"><span class="material-symbols-rounded">grid_view</span></div>
-                <div class="skill-card__name">UI & Визуальный дизайн</div>
-                <div class="skill-card__bar-track"><div class="skill-card__bar-fill" data-width="37"></div></div>
-            </div>
-            <div class="skill-card animate-on-scroll animate-on-scroll--delay-1">
-                <div class="skill-card__icon"><span class="material-symbols-rounded">code</span></div>
-                <div class="skill-card__name">HTML / CSS / Базовый JS</div>
-                <div class="skill-card__bar-track"><div class="skill-card__bar-fill" data-width="28"></div></div>
-            </div>
-            <div class="skill-card animate-on-scroll animate-on-scroll--delay-2">
-                <div class="skill-card__icon"><span class="material-symbols-rounded">groups</span></div>
-                <div class="skill-card__name">Лидерство</div>
-                <div class="skill-card__bar-track"><div class="skill-card__bar-fill" data-width="67"></div></div>
-            </div>
-            <div class="skill-card animate-on-scroll animate-on-scroll--delay-2">
-                <div class="skill-card__icon"><span class="material-symbols-rounded">draw</span></div>
-                <div class="skill-card__name">Промтинженеринг</div>
-                <div class="skill-card__bar-track"><div class="skill-card__bar-fill" data-width="18"></div></div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ═══════════════ SOCIAL LINKS ═══════════════ -->
-    <section class="section" id="social"
-        style="background-color: var(--md-surface-container-low); max-width: 100%;
-               padding-left: calc((100% - 1100px) / 2 + 24px);
-               padding-right: calc((100% - 1100px) / 2 + 24px);">
-        <div class="section__header animate-on-scroll">
-            <span class="section__label">Соцсети</span>
-            <h2 class="section__title">Мои сообщества</h2>
-            <p class="section__subtitle">Присоединяйтесь — Telegram, Discord, GitHub и другие площадки, где я публикую идеи и общаюсь.</p>
-        </div>
-        <div class="social-grid">
-            <a href="https://t.me/Xibsy" target="_blank" rel="noopener noreferrer" class="social-card">
-                <span class="material-symbols-rounded">chat</span>
-                <span class="social-name">Telegram</span>
-                <span class="social-handle">@Xibsy</span>
-            </a>
-            <a href="#" target="_blank" rel="noopener noreferrer" class="social-card">
-                <span class="material-symbols-rounded">sports_esports</span>
-                <span class="social-name">Discord</span>
-                <span class="social-handle">xibsy</span>
-            </a>
-            <a href="https://github.com/Xibsy" target="_blank" rel="noopener noreferrer" class="social-card">
-                <span class="material-symbols-rounded">code</span>
-                <span class="social-name">GitHub</span>
-                <span class="social-handle">Xibsy</span>
-            </a>
-        </div>
-    </section>
-
-    <!-- ═══════════════ FOOTER ════════════════════ -->
-    <footer class="footer">
-        <div class="footer__inner">
-
-            <div class="footer__brand">
-                <span class="footer__logo">Xibsy</span>
-                <p class="footer__tagline">Разработчик • Геймер • Творческий инженер</p>
-            </div>
-
-            <div class="footer__contacts">
-                <p class="footer__contacts-title">Контакты</p>
-                <a href="mailto:pro45951@gmail.com" class="footer__contact-item">
-                    <span class="material-symbols-rounded">mail</span>
-                    pro45951@gmail.com
-                </a>
-                <a href="https://t.me/Xibsy" target="_blank" rel="noopener" class="footer__contact-item">
-                    <span class="material-symbols-rounded">chat</span>
-                    Telegram: @Xibsy
-                </a>
-            </div>
-
-            <div class="footer__social-col">
-                <p class="footer__contacts-title">Соцсети</p>
-                <div class="footer__socials">
-                    <a href="https://github.com/Xibsy" target="_blank" rel="noopener" aria-label="GitHub">
-                        <span class="material-symbols-rounded">code</span>
+            <div class="tab-pane" id="socials">
+                <div class="social-grid">
+                    <a href="https://t.me/Xibsy" target="_blank" rel="noopener noreferrer" class="social-card">
+                        <span class="material-symbols-rounded tg-icon">chat</span>
+                        <div class="social-info-text">
+                            <span class="social-name">Telegram</span>
+                            <span class="social-handle">@Xibsy</span>
+                        </div>
+                        <span class="material-symbols-rounded arrow">east</span>
                     </a>
-                    <a href="https://t.me/Xibsy" target="_blank" rel="noopener" aria-label="Telegram">
-                        <span class="material-symbols-rounded">chat</span>
+                    <a href="#" target="_blank" rel="noopener noreferrer" class="social-card">
+                        <span class="material-symbols-rounded dc-icon">sports_esports</span>
+                        <div class="social-info-text">
+                            <span class="social-name">Discord</span>
+                            <span class="social-handle">xibsy</span>
+                        </div>
+                        <span class="material-symbols-rounded arrow">east</span>
                     </a>
-                    <a href="https://tiktok.com/@xibsy" aria-label="Twitch">
-                        <span class="material-symbols-rounded">smart_display</span>
+                    <a href="https://github.com/Xibsy" target="_blank" rel="noopener noreferrer" class="social-card">
+                        <span class="material-symbols-rounded gh-icon">code</span>
+                        <div class="social-info-text">
+                            <span class="social-name">GitHub</span>
+                            <span class="social-handle">Xibsy</span>
+                        </div>
+                        <span class="material-symbols-rounded arrow">east</span>
+                    </a>
+                    <a href="https://tiktok.com/@xibsy" target="_blank" rel="noopener noreferrer" class="social-card">
+                        <span class="material-symbols-rounded tt-icon">smart_display</span>
+                        <div class="social-info-text">
+                            <span class="social-name">TikTok</span>
+                            <span class="social-handle">@xibsy</span>
+                        </div>
+                        <span class="material-symbols-rounded arrow">east</span>
                     </a>
                 </div>
             </div>
+        </main>
 
-        </div>
-        <div class="footer__bottom">
-            <p>© 2026 Bio. Сделано с ❤️ и Material Design.</p>
-        </div>
-    </footer>
+        <footer class="compact-footer">
+            <p class="copyright">© 2026 Bio. Сделано с Material Design 3</p>
+        </footer>
+    </div>
 
     <script src="static/index.js"></script>
 </body>
